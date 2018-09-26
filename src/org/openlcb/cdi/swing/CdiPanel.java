@@ -1236,7 +1236,12 @@ public class CdiPanel extends JPanel {
                 }
             };
             entry.addPropertyChangeListener(entryListener);
-            cleanupTasks.add(()->{entry.removePropertyChangeListener(entryListener);});
+            cleanupTasks.add(new Runnable() {
+                @Override
+                public void run() {
+                    entry.removePropertyChangeListener(entryListener);
+                }
+            });
             entry.fireUpdate();
 
             JButton b;
@@ -1597,22 +1602,6 @@ public class CdiPanel extends JPanel {
         protected String getDisplayText() {
             String s = textField.getText();
             return s == null ? "" : s;
-        }
-    }
-
-    /**
-      * Provide access to e.g. a MemoryConfig service.
-     *
-      * Default just writes output for debug
-      */
-    public static class ReadWriteAccess {
-        public void doWrite(long address, int space, byte[] data, final
-                            MemoryConfigurationService.McsWriteHandler handler) {
-            logger.log(Level.FINE, "Write to {0} in space {1}", new Object[]{address, space});
-        }
-        public void doRead(long address, int space, int length, final MemoryConfigurationService
-                .McsReadHandler handler) {
-            logger.log(Level.FINE, "Read from {0} in space {1}", new Object[]{address, space});
         }
     }
 
