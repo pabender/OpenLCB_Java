@@ -8,7 +8,7 @@ addons:
 jdk:
   - openjdk8
 
-service
+services:
   - xvfb
 
 before_script:
