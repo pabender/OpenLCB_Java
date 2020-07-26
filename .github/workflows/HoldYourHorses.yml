@@ -13,3 +13,5 @@ jobs:
         uses: mheap/github-action-hold-your-horses@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with: 
+           duration 'pt12h'
